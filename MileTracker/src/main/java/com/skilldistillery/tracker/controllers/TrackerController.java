@@ -13,7 +13,7 @@ import com.skilldistillery.tracker.data.TrackerDAO;
 import com.skilldistillery.tracker.entities.Miles;
 
 @RestController
-@RequestMapping(name="api/")
+@RequestMapping("api/")
 public class TrackerController {
 
 	@Autowired
@@ -38,7 +38,7 @@ public class TrackerController {
 		
 		return dao.deleteMiles(id);
 	}
-	@RequestMapping(path="posts", method=RequestMethod.POST)
+	@RequestMapping(path="miles", method=RequestMethod.POST)
 	public Miles createPost(@RequestBody String json) {
 		return dao.createMiles(json);
 	}
@@ -46,6 +46,14 @@ public class TrackerController {
 	@RequestMapping(path = "ping", method = RequestMethod.GET)
 	public String ping() {
 	  return "pong";
+	}
+	@RequestMapping(path = "miles/total", method = RequestMethod.GET)
+	public int totalRan() {
+		return dao.totalMilesRan();
+	}
+	@RequestMapping(path = "miles/average", method = RequestMethod.GET)
+	public double averageRan() {
+		return dao.averageMilesRan();
 	}
 	
 }

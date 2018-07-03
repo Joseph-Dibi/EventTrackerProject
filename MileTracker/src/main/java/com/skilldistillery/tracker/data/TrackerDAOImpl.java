@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,6 +18,8 @@ public class TrackerDAOImpl implements TrackerDAO {
 
 	@PersistenceContext
 	EntityManager em;
+	@Autowired
+	TrackerDAO dao;
 
 	@Override
 	public Miles replaceMiles(String json, int id) {
@@ -43,7 +46,7 @@ public class TrackerDAOImpl implements TrackerDAO {
 	@Override
 	public List<Miles> showMilesRan() {
 		List<Miles> posts = null;
-		String query = "SELECT p FROM Post p";
+		String query = "SELECT p FROM Miles p";
 		posts = em.createQuery(query, Miles.class).getResultList();
 		return posts;
 	}
@@ -87,5 +90,25 @@ public class TrackerDAOImpl implements TrackerDAO {
 			e.printStackTrace();
 		}
 		return check;
+	}
+	@Override
+	public int totalMilesRan() {
+		List<Miles> averageMilesRan = dao.showMilesRan();
+		int totalMiles = 0;
+		for (Miles miles : averageMilesRan) {
+			totalMiles += miles.getMiles();
+		}
+		return totalMiles;
+	}
+	@Override
+	public double averageMilesRan() {
+		List<Miles> averageMilesRan = dao.showMilesRan();
+		int totalMiles = 0;
+		for (Miles miles : averageMilesRan) {
+			totalMiles += miles.getMiles();
+		}
+		double averageMiles = totalMiles/averageMilesRan.size();
+		
+		return averageMiles;
 	}
 }

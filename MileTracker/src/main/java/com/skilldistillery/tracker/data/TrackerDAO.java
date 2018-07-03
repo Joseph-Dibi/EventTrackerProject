@@ -16,4 +16,8 @@ public interface TrackerDAO {
 
 	Miles createMiles(String json);
 
+	int totalMilesRan();
+
+	double averageMilesRan();
+
 }
