@@ -30,6 +30,8 @@ public class TrackerDAOImpl implements TrackerDAO {
 			if (replacedPost != null) {
 				Miles newPost = om.readValue(json, Miles.class);
 				replacedPost.setMiles(newPost.getMiles());
+				replacedPost.setTime(newPost.getTime());
+				replacedPost.setWeek(newPost.getWeek());
 
 				em.flush();
 
@@ -46,7 +48,7 @@ public class TrackerDAOImpl implements TrackerDAO {
 	@Override
 	public List<Miles> showMilesRan() {
 		List<Miles> posts = null;
-		String query = "SELECT p FROM Miles p";
+		String query = "SELECT m FROM Miles m";
 		posts = em.createQuery(query, Miles.class).getResultList();
 		return posts;
 	}
@@ -92,9 +94,9 @@ public class TrackerDAOImpl implements TrackerDAO {
 		return check;
 	}
 	@Override
-	public int totalMilesRan() {
+	public double totalMilesRan() {
 		List<Miles> averageMilesRan = dao.showMilesRan();
-		int totalMiles = 0;
+		double totalMiles = 0;
 		for (Miles miles : averageMilesRan) {
 			totalMiles += miles.getMiles();
 		}

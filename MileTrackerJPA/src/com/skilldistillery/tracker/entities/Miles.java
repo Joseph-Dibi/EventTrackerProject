@@ -15,17 +15,34 @@ public class Miles {
 	@Id
 	private int id;
 	@Column(name="miles_ran")
-	private int miles;
+	private double miles;
+	private double time;
+	private int week;
 	
 	
-	public int getMiles() {
-		return miles;
-	}
-	public void setMiles(int miles) {
-		this.miles = miles;
-	}
 	public int getId() {
 		return id;
+	}
+	public double getMiles() {
+		return miles;
+	}
+	public void setMiles(double miles) {
+		this.miles = miles;
+	}
+	public double getTime() {
+		return time;
+	}
+	public void setTime(double time) {
+		this.time = time;
+	}
+	public int getWeek() {
+		return week;
+	}
+	public void setWeek(int week) {
+		this.week = week;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	@Override
 	public String toString() {
@@ -36,7 +53,12 @@ public class Miles {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + id;
-		result = prime * result + miles;
+		long temp;
+		temp = Double.doubleToLongBits(miles);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(time);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + week;
 		return result;
 	}
 	@Override
@@ -50,7 +72,11 @@ public class Miles {
 		Miles other = (Miles) obj;
 		if (id != other.id)
 			return false;
-		if (miles != other.miles)
+		if (Double.doubleToLongBits(miles) != Double.doubleToLongBits(other.miles))
+			return false;
+		if (Double.doubleToLongBits(time) != Double.doubleToLongBits(other.time))
+			return false;
+		if (week != other.week)
 			return false;
 		return true;
 	}

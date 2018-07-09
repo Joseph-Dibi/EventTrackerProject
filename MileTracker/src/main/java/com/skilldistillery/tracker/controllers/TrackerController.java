@@ -48,7 +48,7 @@ public class TrackerController {
 	  return "pong";
 	}
 	@RequestMapping(path = "miles/total", method = RequestMethod.GET)
-	public int totalRan() {
+	public double totalRan() {
 		return dao.totalMilesRan();
 	}
 	@RequestMapping(path = "miles/average", method = RequestMethod.GET)
