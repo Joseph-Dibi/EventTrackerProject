@@ -18,6 +18,7 @@ public class Miles {
 	private double miles;
 	private double time;
 	private int week;
+	private String comments;
 	
 	
 	public int getId() {
@@ -44,6 +45,12 @@ public class Miles {
 	public void setId(int id) {
 		this.id = id;
 	}
+	public String getComments() {
+		return comments;
+	}
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
 	@Override
 	public String toString() {
 		return "Miles [id=" + id + ", miles=" + miles + "]";
@@ -52,6 +59,7 @@ public class Miles {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((comments == null) ? 0 : comments.hashCode());
 		result = prime * result + id;
 		long temp;
 		temp = Double.doubleToLongBits(miles);
@@ -70,6 +78,11 @@ public class Miles {
 		if (getClass() != obj.getClass())
 			return false;
 		Miles other = (Miles) obj;
+		if (comments == null) {
+			if (other.comments != null)
+				return false;
+		} else if (!comments.equals(other.comments))
+			return false;
 		if (id != other.id)
 			return false;
 		if (Double.doubleToLongBits(miles) != Double.doubleToLongBits(other.miles))
@@ -80,5 +93,6 @@ public class Miles {
 			return false;
 		return true;
 	}
+
 	
 }

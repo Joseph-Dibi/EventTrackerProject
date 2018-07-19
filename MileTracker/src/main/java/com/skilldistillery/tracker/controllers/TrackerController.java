@@ -2,6 +2,8 @@ package com.skilldistillery.tracker.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,38 +11,57 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.tracker.data.TrackerDAO;
 import com.skilldistillery.tracker.entities.Miles;
+import com.skilldistillery.tracker.services.TrackerService;
 
 @RestController
 @RequestMapping("api/")
 public class TrackerController {
 
 	@Autowired
-	TrackerDAO dao;
+	TrackerService serv;
 	
 	@RequestMapping(path="miles", method=RequestMethod.GET)
 	public List<Miles> showMiles() {
 		
-		return dao.showMilesRan();
+		return serv.showMilesRan();
 	}
 	@RequestMapping(path="miles/{id}", method=RequestMethod.GET)
 	public Miles showMilesSpecific(@PathVariable int id) {
 		
-		return dao.findMiles(id);
+		return serv.findMiles(id);
+	}
+	@RequestMapping(path="miles/{id}", method=RequestMethod.PATCH)
+	public Miles updatePost(@RequestBody Miles run, @PathVariable int id) {
+		return serv.updateMiles(run, id);
 	}
 	@RequestMapping(path="miles/{id}", method=RequestMethod.PUT)
-	public Miles updatePost(@RequestBody String json, @PathVariable int id) {
-		return dao.replaceMiles(json, id);
+	public Miles replacePost(@RequestBody Miles run, @PathVariable int id) {
+		return serv.replaceMiles(run, id);
 	}
 	@RequestMapping(path="miles/{id}", method=RequestMethod.DELETE)
-	public Boolean deleteMiles(@PathVariable int id) {
-		
-		return dao.deleteMiles(id);
+	public Boolean deleteMiles(@PathVariable int id, HttpServletResponse response) {
+		Boolean deleted = serv.deleteMiles(id);
+		if (deleted) {
+			response.setStatus(204);
+		}
+		else {
+			response.setStatus(400);
+
+		}
+		return deleted;
 	}
 	@RequestMapping(path="miles", method=RequestMethod.POST)
-	public Miles createPost(@RequestBody String json) {
-		return dao.createMiles(json);
+	public Miles createPost(@RequestBody Miles run, HttpServletResponse response) {
+		Miles runCheck = serv.createMiles(run);
+		if (runCheck != null) {
+			response.setStatus(201);
+		}
+		else {
+			response.setStatus(400);
+
+		}
+		return runCheck;
 	}
 	
 	@RequestMapping(path = "ping", method = RequestMethod.GET)
@@ -48,13 +69,26 @@ public class TrackerController {
 	  return "pong";
 	}
 	@RequestMapping(path = "miles/total", method = RequestMethod.GET)
-	public double totalRan() {
-		return dao.totalMilesRan();
+	public List<Double> totalRan() {
+		return serv.totalMilesRan();
+	}
+	@RequestMapping(path = "miles/week/{week}/total", method = RequestMethod.GET)
+	public List<Double> weeklyTotalRan(@PathVariable int week) {
+		return serv.findWeeklyTotal(week);
 	}
 	@RequestMapping(path = "miles/average", method = RequestMethod.GET)
-	public double averageRan() {
-		return dao.averageMilesRan();
+	public List<Double> averageRan() {
+		return serv.averageMilesRan();
 	}
+	@RequestMapping(path = "miles/week/{week}/average", method = RequestMethod.GET)
+	public List<Double> weeklyAverageRan(@PathVariable int week) {
+		return serv.findWeeklyAverage(week);
+	}
+	@RequestMapping(path = "miles/week/{week}", method = RequestMethod.GET)
+	public List<Miles> milesByWeek(@PathVariable int week) {
+		return serv.findByWeek(week);
+	}
+
 	
 }
 

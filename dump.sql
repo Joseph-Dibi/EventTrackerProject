@@ -25,16 +25,14 @@ DROP TABLE IF EXISTS `miletracker`.`miles_ran` ;
 
 CREATE TABLE IF NOT EXISTS `miletracker`.`miles_ran` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `miles_ran` INT(11) NOT NULL,
+  `miles_ran` DOUBLE NOT NULL,
+  `time` DOUBLE NULL DEFAULT 0,
+  `week` INT NOT NULL,
+  `comments` VARCHAR(200) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 6
 DEFAULT CHARACTER SET = utf8;
-
-SET SQL_MODE = '';
-GRANT USAGE ON *.* TO student;
- DROP USER student;
-SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-CREATE USER 'student' IDENTIFIED BY 'student';
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
@@ -46,8 +44,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `miletracker`;
-INSERT INTO `miletracker`.`miles_ran` (`id`, `miles_ran`) VALUES (1, 1);
-INSERT INTO `miletracker`.`miles_ran` (`id`, `miles_ran`) VALUES (2, 3);
-INSERT INTO `miletracker`.`miles_ran` (`id`, `miles_ran`) VALUES (3, 2);
+INSERT INTO `miletracker`.`miles_ran` (`id`, `miles_ran`, `time`, `week`, `comments`) VALUES (1, 1.5, 15.25, 1, NULL);
+INSERT INTO `miletracker`.`miles_ran` (`id`, `miles_ran`, `time`, `week`, `comments`) VALUES (2, 2, 15, 1, NULL);
+INSERT INTO `miletracker`.`miles_ran` (`id`, `miles_ran`, `time`, `week`, `comments`) VALUES (3, 2, 13, 2, NULL);
 
 COMMIT;
