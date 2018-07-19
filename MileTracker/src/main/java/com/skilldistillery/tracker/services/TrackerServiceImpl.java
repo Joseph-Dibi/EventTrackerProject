@@ -101,6 +101,9 @@ public class TrackerServiceImpl implements TrackerService {
 			if (mile.getTime() < 0) {
 				mile.setTime(0);
 			}
+			if(mile.getComments() == null) {
+				mile.setComments("");
+			}
 			repo.saveAndFlush(mile);
 		}
 		else {

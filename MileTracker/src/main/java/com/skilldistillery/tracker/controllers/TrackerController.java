@@ -43,7 +43,7 @@ public class TrackerController {
 	public Boolean deleteMiles(@PathVariable int id, HttpServletResponse response) {
 		Boolean deleted = serv.deleteMiles(id);
 		if (deleted) {
-			response.setStatus(204);
+			response.setStatus(200);
 		}
 		else {
 			response.setStatus(400);
