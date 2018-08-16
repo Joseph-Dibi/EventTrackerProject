@@ -3,7 +3,7 @@ http://18.216.126.90:8080/MileTracker/
 
 ### Why this project?
 
-The purpose of this project was to demonstrate our ability to build a full-stack web application with full Crud implementation. It really showed how far our skills had come in the four months speant learning at Skill Distillery Bootcamp. 
+The purpose of this project was to demonstrate our ability to build a full-stack web application with full Crud implementation. It really showed how far our skills had come in the four months spent learning at Skill Distillery Bootcamp. 
 Prior to this project, we had been building either back-end or front-end projects and one full-stack group project. This was the first full-stack application that I created on my own.
 
 ### What is Event Tracker?
