@@ -1,3 +1,16 @@
-I created a very simple mile tracker that uses restful services. Users can input(Post) how many miles they have run per session. If they make an error they are able to edit (put) or remove(delete) runs. They are also able to view(Get) all of their runs or a specific run. Finally, users can track their average miles or total amount of miles ran.
+### AWS link
+http://18.216.126.90:8080/MileTracker/
 
-scp -i ~/.ssh/aws.pem ~/SD/Java/mileTracker/dump.sql ec2-user@18.216.126.90:~
+### Why this project?
+
+The purpose of this project was to demonstrate our ability to build a full-stack web application with full Crud implementation. It really showed how far our skills had come in the four months speant learning at Skill Distillery Bootcamp. 
+Prior to this project, we had been building either back-end or front-end projects and one full-stack group project. This was the first full-stack application that I created on my own.
+
+### What is Event Tracker?
+
+Event tracker is a simple application that allows users to log how many miles they have been running each week. The program is designed so that they are able to add/remove/edit any run times that they have input. These times can be further sorted by week and/or viewed as total or average runtimes.
+
+### Technologies Used
+
+Event Tracker utilizes a Mysql database with a Java back-end that handles all the retrieval and editing of the database along with aggregating the data of runs together to allow users to view total or average runtimes. Angular was used to build the front end of the application and allow the users to interact with their runs.
+
