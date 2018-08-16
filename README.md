@@ -12,5 +12,5 @@ Event tracker is a simple application that allows users to log how many miles th
 
 ### Technologies Used
 
-Event Tracker utilizes a Mysql database with a Java back-end that handles all the retrieval and editing of the database along with aggregating the data of runs together to allow users to view total or average runtimes. Angular was used to build the front end of the application and allow the users to interact with their runs.
+Event Tracker utilizes a Mysql database with a Java back-end that handles all the retrieval and editing of the database along with aggregating the data of runs together to allow users to view total or average runtimes. RESTful API was utilized to pass the information to the Angular front-end which consumed and displayed the data.
 
